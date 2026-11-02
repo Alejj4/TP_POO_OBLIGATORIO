@@ -106,7 +106,43 @@ public class Viaje implements Comparable<Viaje>{
     public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
         this.fechaHoraInicio = fechaHoraInicio;
     }
+
+    public Estacion getEstacionOrigen() {
+        return estacionOrigen;
+    }
+
+    public Estacion getEstacionDestino() {
+        return estacionDestino;
+    }
+
+    @Override
+    public String toString() {
+        String destino;
+        if (estacionDestino != null) {
+            destino = estacionDestino.getCodigo();
+        } else {
+            destino = "-";
+        }
+
+        String fin;
+        if (fechaHoraFin != null) {
+            long minutos = java.time.Duration.between(fechaHoraInicio, fechaHoraFin).toMinutes();
+            fin = fechaHoraFin.toString() + " (" + minutos + " min)";
+        } else {
+            fin = "En curso";
+        }
+
+        return "Vehiculo: " + vehiculo.getCodigo() +
+                " | Origen: " + estacionOrigen.getCodigo() +
+                " | Destino: " + destino +
+                " | Inicio: " + fechaHoraInicio +
+                " | Fin: " + fin;
+    }
+
+
 }
+
+
 
 
 

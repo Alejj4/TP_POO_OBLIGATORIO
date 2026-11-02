@@ -27,6 +27,8 @@ public class Swing {
     private JButton botonBuscarUsuario;
     private JButton botonAgregarEstacion;
     private JButton botonVolverAdmin;
+    private JButton botonReporteViajes;
+    private JButton botonReporteEstacion;
 
     private MenuUsuario menuUsuario;
     private MenuAdmin menuAdmin;
@@ -104,6 +106,20 @@ public class Swing {
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuAdmin.agregarEstacion();
+            }
+        });
+
+        botonReporteViajes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuAdmin.verReporteViajesPorUsuario();
+            }
+        });
+
+        botonReporteEstacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuAdmin.verReporteUsoPorEstacion();
             }
         });
 

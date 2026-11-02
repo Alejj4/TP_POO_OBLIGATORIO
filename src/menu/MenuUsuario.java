@@ -54,12 +54,12 @@ public class MenuUsuario extends Menu{
         if(documento == null) return;
         String codigoEstacion = JOptionPane.showInputDialog("Código de estación:");
         if(codigoEstacion == null) return;
-        String codigoVehiculo = JOptionPane.showInputDialog("Codigo de vehiculo:");
+        String codigoVehiculo = JOptionPane.showInputDialog("Código de vehículo:");
         if (codigoVehiculo == null) return;
 
         try {
             controladorViajes.retirarVehiculo(documento, codigoVehiculo, codigoEstacion);
-            JOptionPane.showMessageDialog(null,"Vehiculo retirado. Buen viaje!");
+            JOptionPane.showMessageDialog(null,"Vehículo retirado. Buen viaje!");
         } catch (UsuarioNoEncontradoException | EstacionNoEncontradaException | VehiculoNoDisponibleException | RetiroNoPermitidoException e) {
             JOptionPane.showMessageDialog(null,"Error: " + e.getMessage());
         }
@@ -68,12 +68,12 @@ public class MenuUsuario extends Menu{
     public void devolverVehiculo() {
         String documento = JOptionPane.showInputDialog("Documento:");
         if (documento == null) return;
-        String codigoEstacion = JOptionPane.showInputDialog("Código de estación de devolucion:");
+        String codigoEstacion = JOptionPane.showInputDialog("Código de estación de devolución:");
         if (codigoEstacion == null) return;
 
         try {
             double costo = controladorViajes.devolverVehiculo(documento, codigoEstacion);
-            JOptionPane.showMessageDialog(null,"Vehiculo devuelto. Costo del viaje: $" + costo);
+            JOptionPane.showMessageDialog(null,"Vehículo devuelto. Costo del viaje: $" + costo);
         } catch (UsuarioNoEncontradoException | EstacionNoEncontradaException e) {
             JOptionPane.showMessageDialog(null,"Error: " + e.getMessage());
         }

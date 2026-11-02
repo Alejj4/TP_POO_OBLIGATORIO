@@ -30,13 +30,13 @@ public class ControladorCuenta {
     public Usuario registrarUsuario(String nombre, String documento, String email) {
 
         if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("Debe ingresar un nombre valido");
+            throw new IllegalArgumentException("Debe ingresar un nombre válido");
         }
         if (documento == null || documento.isBlank()) {
             throw new IllegalArgumentException("Debe ingresar un documento");
         }
         if (email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("El email no es valido");
+            throw new IllegalArgumentException("El email no es válido");
         }
 
         if (repositorio.buscarUsuario(documento) != null) {

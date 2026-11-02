@@ -12,7 +12,6 @@ public class BicicletaElectrica extends Vehiculo {
         this.nivelBateria = 100;
     }
 
-    //@Override
     @Override
     public boolean estaDisponible() {
         return super.estaDisponible() && this.nivelBateria >= 15;

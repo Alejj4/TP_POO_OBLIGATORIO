@@ -7,11 +7,12 @@ public abstract class Menu {
     protected int leerEntero(String mensaje) {
         while (true) {
             String texto = JOptionPane.showInputDialog(mensaje);
-            if (texto == null){return -1;}
+            if (texto == null){
+                return -1;}
             try {
                 return Integer.parseInt(texto);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null,"Ingresá un numero valido.");
+                JOptionPane.showMessageDialog(null,"Ingresa un número válido.");
             }
         }
     }
@@ -19,11 +20,12 @@ public abstract class Menu {
     protected double leerDouble(String mensaje) {
         while (true) {
             String texto = JOptionPane.showInputDialog(mensaje);
-            if (texto == null){return -1;}
+            if (texto == null){
+                return -1;}
             try {
                 return Double.parseDouble(texto);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null,"Ingresá un importe valido.");
+                JOptionPane.showMessageDialog(null,"Ingresa un importe válido.");
             }
         }
     }

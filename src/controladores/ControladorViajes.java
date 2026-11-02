@@ -33,12 +33,12 @@ public class ControladorViajes {
 
         Estacion estacion = repositorio.buscarEstacion(codigoEstacion);
         if (estacion == null) {
-            throw new EstacionNoEncontradaException("No existe la estacion " + codigoEstacion);
+            throw new EstacionNoEncontradaException("No existe la estación " + codigoEstacion);
         }
 
         Vehiculo vehiculo = estacion.buscarVehiculo(codigoVehiculo);
         if (vehiculo == null) {
-            throw new VehiculoNoDisponibleException("El vehiculo " + codigoVehiculo + " no esta en la estacion " + codigoEstacion);
+            throw new VehiculoNoDisponibleException("El vehículo " + codigoVehiculo + " no está en la estación " + codigoEstacion);
         }
         Viaje viaje = usuario.crearViaje(vehiculo, estacion);
         estacion.quitarVehiculo(vehiculo);
@@ -56,7 +56,7 @@ public class ControladorViajes {
 
         Estacion estacion = repositorio.buscarEstacion(codigoEstacion);
         if (estacion == null) {
-            throw new EstacionNoEncontradaException("No existe la estacion " + codigoEstacion);
+            throw new EstacionNoEncontradaException("No existe la estación " + codigoEstacion);
         }
 
         for (Viaje viaje : usuario.getViajes()) {
