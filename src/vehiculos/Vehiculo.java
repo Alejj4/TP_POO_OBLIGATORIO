@@ -15,6 +15,10 @@ public abstract class Vehiculo {
         this.estado = Estado.DISPONIBLE;
     }
 
+    public void registrarUso(int minutos) {
+        cambiarEstado(Estado.DISPONIBLE);
+    }
+
     public boolean estaDisponible() {
         return this.estado == Estado.DISPONIBLE;
     }

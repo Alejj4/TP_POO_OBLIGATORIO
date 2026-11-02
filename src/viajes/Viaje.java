@@ -69,40 +69,10 @@ public class Viaje implements Comparable<Viaje>{
         long tiempoViaje = Duration.between(this.fechaHoraInicio, this.fechaHoraFin).toMinutes();
         if (tiempoViaje > 1440) {
             vehiculo.cambiarEstado(Estado.FUERA_DE_SERVICIO);
-        } else if (this.vehiculo instanceof BicicletaElectrica bici) {
-            int bateria = bici.getbateria();
-            int bateriaRestante = (int) (bateria - (0.5 * tiempoViaje));
-            if (bateriaRestante < 0) {
-                bateriaRestante = 0;
-            }
-            bici.setbateria(bateriaRestante);
-            if (bici.getbateria() < 15) {
-                bici.cambiarEstado(Estado.BATERIA_BAJA);
-            } else {
-                bici.cambiarEstado(Estado.DISPONIBLE);
-
-            }
-        } else if (this.vehiculo instanceof MonopatinElectrico monopatin) {
-            int bateria = monopatin.getbateria();
-            int bateriaRestante = (int) (bateria - (0.5 * tiempoViaje));
-            if (bateriaRestante < 0) {
-                bateriaRestante = 0;
-            }
-            monopatin.setbateria(bateriaRestante);
-            if (monopatin.getbateria() < 15) {
-                monopatin.cambiarEstado(Estado.BATERIA_BAJA);
-            } else {
-                monopatin.cambiarEstado(Estado.DISPONIBLE);
-            }
-
-
         } else {
-            vehiculo.cambiarEstado(Estado.DISPONIBLE);
-
+            vehiculo.registrarUso((int) tiempoViaje);
         }
-
-
-        }
+    }
 
     public double calcularCosto(Promocion promo) {
         int minutos = (int) Duration.between(this.fechaHoraInicio, this.fechaHoraFin).toMinutes();

@@ -32,6 +32,21 @@ public class MonopatinElectrico extends Vehiculo {
         int minutosExcedentes = minutos - 120;
         return 300 + (50 * 120) + (50 * 1.5 * minutosExcedentes);
     }
+
+    @Override
+    public void registrarUso(int minutos) {
+        nivelBateria -= (int) (0.5 * minutos);
+        if (nivelBateria < 0) {
+            nivelBateria = 0;
+        }
+
+        if (nivelBateria < 15) {
+            cambiarEstado(Estado.BATERIA_BAJA);
+        } else {
+            cambiarEstado(Estado.DISPONIBLE);
+        }
+    }
+
     public int getbateria(){
         return this.nivelBateria;
     }
