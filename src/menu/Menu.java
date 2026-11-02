@@ -12,7 +12,7 @@ public abstract class Menu {
             try {
                 return Integer.parseInt(texto);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null,"Ingresa un numero valido.");
+                JOptionPane.showMessageDialog(null,"Ingresa un número válido.");
             }
         }
     }
@@ -25,7 +25,7 @@ public abstract class Menu {
             try {
                 return Double.parseDouble(texto);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null,"Ingresa un importe valido.");
+                JOptionPane.showMessageDialog(null,"Ingresa un importe válido.");
             }
         }
     }

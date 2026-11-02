@@ -149,7 +149,7 @@
                     if (v != null && estacion != null) estacion.agregarVehiculo(v);
                 }
             } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Error al cargar vehiculos: " + e.getMessage());
+                System.out.println("Error al cargar vehículos: " + e.getMessage());
             }
         }
 

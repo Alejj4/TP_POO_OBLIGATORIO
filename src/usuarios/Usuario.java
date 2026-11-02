@@ -81,7 +81,7 @@ public class Usuario {
             }else
                 throw new SaldoInsuficienteException("Saldo insuficiente");
         } else
-            throw new PlanMensualActivoException("Ya tenes el plan mensual.");
+            throw new PlanMensualActivoException("Ya ténes el plan mensual.");
     }
 
     public static Usuario desdeLinea(String linea) {

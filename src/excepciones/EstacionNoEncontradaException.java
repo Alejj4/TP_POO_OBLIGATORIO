@@ -3,6 +3,6 @@ package excepciones;
 public class EstacionNoEncontradaException extends Exception {
 
     public EstacionNoEncontradaException(String message) {
-        super("Estacion no encontrada.");
+        super("Estación no encontrada.");
     }
 }

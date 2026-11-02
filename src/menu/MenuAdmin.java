@@ -76,16 +76,16 @@ public class MenuAdmin extends Menu{
     }
 
     public void verReporteUsoPorEstacion() {
-        String codigo = JOptionPane.showInputDialog("Codigo de la estacion:");
+        String codigo = JOptionPane.showInputDialog("Código de la estación:");
         if (codigo == null) return;
 
         try {
             List<Viaje> viajes = controladorReporte.reporteUsoPorEstacion(codigo);
 
             if (viajes.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No hay viajes registrados en esta estacion.");
+                JOptionPane.showMessageDialog(null, "No hay viajes registrados en esta estación.");
             } else {
-                String reporte = "Uso de la estacion " + codigo + ":\n\n";
+                String reporte = "Uso de la estación " + codigo + ":\n\n";
                 for (Viaje v : viajes) {
                     reporte += v.toString() + "\n";
                 }
