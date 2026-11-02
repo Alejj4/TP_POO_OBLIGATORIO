@@ -13,6 +13,7 @@ public class Usuario {
     private String nombre;
     private String documento;
     private String email;
+    private int viajesConPlanUsados;
     private Cuenta cuenta;
     private boolean tienePlanMensual;
     private List<Viaje> viajes;
@@ -56,21 +57,25 @@ public class Usuario {
     }
 
     public Viaje crearViaje(Vehiculo vehiculo, Estacion estacionOrigen) throws RetiroNoPermitidoException, VehiculoNoDisponibleException{
-        if(!tieneViajeAbierto() && puedeRetirar(vehiculo.calcularCosto(30))){
-            if(vehiculo.estaDisponible()){
-                Viaje viaje = new Viaje(this, vehiculo, estacionOrigen );
-                viajes.add(viaje);
-                vehiculo.cambiarEstado(Estado.EN_USO);
-                estacionOrigen.quitarVehiculo(vehiculo);
-                return viaje;
-            } else
-                throw new VehiculoNoDisponibleException("El vehículo seleccionado no se encuentra disponible.");
-        } else
-            throw new RetiroNoPermitidoException("Su cuenta no dispone del saldo mínimo requerido");
+        if (tieneViajeAbierto()) {
+            throw new RetiroNoPermitidoException("Ya tenés un viaje en curso. Devolvé el vehículo antes de retirar otro.");
+        }
+        double minimo = vehiculo.calcularCosto(30);
+        if (!puedeRetirar(minimo)) {
+            throw new RetiroNoPermitidoException("Saldo insuficiente: necesitás al menos $" + minimo + " para retirar este vehículo.");
+        }
+        if (!vehiculo.estaDisponible()) {
+            throw new VehiculoNoDisponibleException("El vehículo seleccionado no se encuentra disponible.");
+        }
+        Viaje viaje = new Viaje(this, vehiculo, estacionOrigen);
+        viajes.add(viaje);
+        vehiculo.cambiarEstado(Estado.EN_USO);
+        estacionOrigen.quitarVehiculo(vehiculo);
+        return viaje;
     }
 
     public String contenidoArchivo() {
-        return nombre + ";" + documento + ";" + email + ";" + tienePlanMensual + ";" + cuenta.getSaldo();
+        return nombre + ";" + documento + ";" + email + ";" + tienePlanMensual + ";" + cuenta.getSaldo() + ";" + viajesConPlanUsados;
     }
 
     public void suscribirPlanMensual() throws ImporteInvalidoException, SaldoInsuficienteException, PlanMensualActivoException {
@@ -78,6 +83,7 @@ public class Usuario {
             if(cuenta.getSaldo() >= PRECIO_PLAN_MENSUAL){
             cuenta.debitar(PRECIO_PLAN_MENSUAL,"Plan mensual");
             tienePlanMensual = true;
+            viajesConPlanUsados = 0;
             }else
                 throw new SaldoInsuficienteException("Saldo insuficiente");
         } else
@@ -89,10 +95,13 @@ public class Usuario {
         String nombre = partes[0];
         String documento = partes[1];
         String email = partes[2];
-        boolean plan = Boolean.parseBoolean(partes[3]);
-        double saldo = Double.parseDouble(partes[4]);
 
         Usuario usuario = new Usuario(nombre, documento, email);
+
+        boolean plan = Boolean.parseBoolean(partes[3]);
+        double saldo = Double.parseDouble(partes[4]);
+        usuario.viajesConPlanUsados = Integer.parseInt(partes[5]);
+
         usuario.tienePlanMensual = plan;
         usuario.cuenta = new Cuenta(saldo);
         return usuario;
@@ -106,6 +115,15 @@ public class Usuario {
             }
         }
         return viajesPrevios;
+    }
+
+
+    public void registrarViajeConPlan() {
+        viajesConPlanUsados++;
+    }
+
+    public int getViajesConPlanUsados() {
+        return viajesConPlanUsados;
     }
 
 

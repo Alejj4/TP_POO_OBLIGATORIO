@@ -72,6 +72,10 @@ public class ControladorViajes {
                 }
                 double totalViaje = viaje.calcularCosto(promo);
 
+                if (usuario.getTienePlanMensual() && !viaje.fueCancelado()) {
+                    usuario.registrarViajeConPlan();
+                }
+
                 if (totalViaje > 0) {
                     Cuenta cuentaUsuario = usuario.getCuenta();
                     try {
