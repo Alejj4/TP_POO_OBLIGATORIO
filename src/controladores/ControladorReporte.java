@@ -16,11 +16,11 @@ public class ControladorReporte {
         this.repositorio = repositorio; }
 
     public List<Viaje> reporteViajesPorUsuario(String documento) throws UsuarioNoEncontradoException {
-        Usuario u = repositorio.buscarUsuario(documento);
-        if (u == null){
+        Usuario usuario = repositorio.buscarUsuario(documento);
+        if (usuario == null){
             throw new UsuarioNoEncontradoException("No existe el usuario " + documento);
         }
-        List<Viaje> viajes = new ArrayList<>(u.getViajes());
+        List<Viaje> viajes = new ArrayList<>(usuario.getViajes());
         Collections.sort(viajes);
         return viajes;
 
