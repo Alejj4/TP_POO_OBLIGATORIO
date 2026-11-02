@@ -16,6 +16,8 @@ public class Viaje implements Comparable<Viaje>{
     private Vehiculo vehiculo;
     private Estacion estacionOrigen;
     private Estacion estacionDestino;
+    private static final int minutosDeCancelacion = 2;
+
 
     public LocalDateTime getFechaHoraFin() {
         return fechaHoraFin;
@@ -47,6 +49,19 @@ public class Viaje implements Comparable<Viaje>{
     public int compareTo(Viaje otroViaje) {
         return otroViaje.fechaHoraInicio.compareTo(this.fechaHoraInicio);
     }
+
+    public boolean estaFinalizado() {
+        return fechaHoraFin != null;
+    }
+
+    public long getDuracionMinutos() {
+        return Duration.between(fechaHoraInicio, fechaHoraFin).toMinutes();
+    }
+
+    public boolean fueCancelado() {
+        return estaFinalizado() && getDuracionMinutos() <= minutosDeCancelacion;
+    }
+
 
     public void finalizar(Estacion estacionDestino) {
         this.estacionDestino = estacionDestino;

@@ -67,7 +67,7 @@ public class ControladorViajes {
                 Promocion promo = null;
                 if (usuario.getTienePlanMensual()) {
                     promo = new PlanMensual();
-                } else if (usuario.getViajes().size() == 1) {
+                } else if (usuario.cantidadViajesPrevios(viaje) == 0.) {
                     promo = new PrimerViaje();
                 }
                 double totalViaje = viaje.calcularCosto(promo);

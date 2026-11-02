@@ -64,9 +64,9 @@ public class Usuario {
                 estacionOrigen.quitarVehiculo(vehiculo);
                 return viaje;
             } else
-                throw new VehiculoNoDisponibleException("El vehiculo seleccionado no se encuentra disponible.");
+                throw new VehiculoNoDisponibleException("El vehículo seleccionado no se encuentra disponible.");
         } else
-            throw new RetiroNoPermitidoException("Su cuenta no cuenta con el saldo minimo requerido.");
+            throw new RetiroNoPermitidoException("Su cuenta no dispone del saldo mínimo requerido");
     }
 
     public String contenidoArchivo() {
@@ -97,6 +97,17 @@ public class Usuario {
         usuario.cuenta = new Cuenta(saldo);
         return usuario;
     }
+
+    public int cantidadViajesPrevios(Viaje actual) {
+        int viajesPrevios = 0;
+        for (Viaje viaje : viajes) {
+            if (viaje != actual && viaje.estaFinalizado() && !viaje.fueCancelado()) {
+                viajesPrevios++;
+            }
+        }
+        return viajesPrevios;
+    }
+
 
     public Cuenta getCuenta() {
         return cuenta;
