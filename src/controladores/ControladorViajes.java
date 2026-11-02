@@ -48,7 +48,7 @@ public class ControladorViajes {
 
 
 
-    public double devolverVehiculo(String documento, String codigoEstacion) throws UsuarioNoEncontradoException, EstacionNoEncontradaException {
+    public double devolverVehiculo(String documento, String codigoEstacion) throws UsuarioNoEncontradoException, EstacionNoEncontradaException, NoTieneViajeAbiertoException {
         Usuario usuario = repositorio.buscarUsuario(documento);
         if (usuario == null) {
             throw new UsuarioNoEncontradoException("No existe un usuario con documento " + documento);
@@ -89,6 +89,5 @@ public class ControladorViajes {
                 return totalViaje;
             }
         }
-        return 0;
-    }
+        throw new NoTieneViajeAbiertoException("No tenés ningún viaje en curso.");    }
 }
