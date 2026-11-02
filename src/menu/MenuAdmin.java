@@ -2,6 +2,7 @@ package menu;
 
 import controladores.ControladorCuenta;
 import controladores.ControladorEstacion;
+import controladores.ControladorReporte;
 import usuarios.Usuario;
 import vehiculos.Estacion;
 
@@ -11,11 +12,14 @@ import java.util.Collections;
 public class MenuAdmin extends Menu{
     private ControladorCuenta controladorCuenta;
     private ControladorEstacion controladorEstacion;
+    private ControladorReporte controladorReporte;
 
-    public MenuAdmin(ControladorCuenta controladorCuenta, ControladorEstacion controladorEstacion) {
+    public MenuAdmin(ControladorCuenta controladorCuenta, ControladorEstacion controladorEstacion, ControladorReporte controladorReporte) {
         this.controladorCuenta = controladorCuenta;
         this.controladorEstacion = controladorEstacion;
+        this.controladorReporte = controladorReporte;
     }
+    // hay que hacer la logica para que aparezca en pantalla el tema de los reportes
 
     public void buscarUsuario() {
         String documento = JOptionPane.showInputDialog("Documento:");
