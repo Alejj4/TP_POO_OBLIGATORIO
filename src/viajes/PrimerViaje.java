@@ -8,9 +8,9 @@ public class PrimerViaje implements  Promocion {
 
     @Override
     public double calcularDescuento(Viaje viaje, double costo){
-        if(viaje.getUsuario().getViajes().size() > 1){
+        if (viaje.getUsuario().cantidadViajesPrevios(viaje) > 0){
             return 0.0;
-        }else {
+        } else {
             long duracion = Duration.between(viaje.getFechaHoraInicio(), viaje.getFechaHoraFin()).toMinutes();
             if (duracion <= minutosGratis){ return costo;
             }else

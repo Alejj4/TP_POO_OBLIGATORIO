@@ -74,7 +74,7 @@ public class MenuUsuario extends Menu{
         try {
             double costo = controladorViajes.devolverVehiculo(documento, codigoEstacion);
             JOptionPane.showMessageDialog(null,"Vehículo devuelto. Costo del viaje: $" + costo);
-        } catch (UsuarioNoEncontradoException | EstacionNoEncontradaException e) {
+        } catch (UsuarioNoEncontradoException | EstacionNoEncontradaException | NoTieneViajeAbiertoException e) {
             JOptionPane.showMessageDialog(null,"Error: " + e.getMessage());
         }
     }

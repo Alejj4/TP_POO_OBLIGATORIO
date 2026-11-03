@@ -48,7 +48,7 @@ public class ControladorViajes {
 
 
 
-    public double devolverVehiculo(String documento, String codigoEstacion) throws UsuarioNoEncontradoException, EstacionNoEncontradaException {
+    public double devolverVehiculo(String documento, String codigoEstacion) throws UsuarioNoEncontradoException, EstacionNoEncontradaException, NoTieneViajeAbiertoException {
         Usuario usuario = repositorio.buscarUsuario(documento);
         if (usuario == null) {
             throw new UsuarioNoEncontradoException("No existe un usuario con documento " + documento);
@@ -67,10 +67,14 @@ public class ControladorViajes {
                 Promocion promo = null;
                 if (usuario.getTienePlanMensual()) {
                     promo = new PlanMensual();
-                } else if (usuario.getViajes().size() == 1) {
+                } else if (usuario.cantidadViajesPrevios(viaje) == 0.) {
                     promo = new PrimerViaje();
                 }
                 double totalViaje = viaje.calcularCosto(promo);
+
+                if (usuario.getTienePlanMensual() && !viaje.fueCancelado()) {
+                    usuario.registrarViajeConPlan();
+                }
 
                 if (totalViaje > 0) {
                     Cuenta cuentaUsuario = usuario.getCuenta();
@@ -85,6 +89,5 @@ public class ControladorViajes {
                 return totalViaje;
             }
         }
-        return 0;
-    }
+        throw new NoTieneViajeAbiertoException("No tenés ningún viaje en curso.");    }
 }
