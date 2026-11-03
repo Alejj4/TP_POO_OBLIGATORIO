@@ -9,7 +9,7 @@ public class PlanMensual implements Promocion{
 
     @Override
     public double calcularDescuento(Viaje viaje, double costo) {
-        if (!viaje.getUsuario().getTienePlanMensual() || viaje.getUsuario().getViajesConPlanUsados() > topeViajes) {
+        if (!viaje.getUsuario().getTienePlanMensual() || viaje.getUsuario().getViajesConPlanUsados() >= topeViajes) {
             return 0.0;
         } else {
             long duracion = Duration.between(viaje.getFechaHoraInicio(), viaje.getFechaHoraFin()).toMinutes();
