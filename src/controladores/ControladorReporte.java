@@ -26,8 +26,6 @@ public class ControladorReporte {
 
     }
 
-
-
     public List<Viaje> reporteUsoPorEstacion(String codigo) throws EstacionNoEncontradaException {
         Estacion estacion = repositorio.buscarEstacion(codigo);
         if (estacion == null){

@@ -3,10 +3,8 @@ package viajes;
 import usuarios.Usuario;
 import vehiculos.*;
 
-
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Viaje implements Comparable<Viaje>{
     private LocalDateTime fechaHoraInicio;
@@ -86,8 +84,6 @@ public class Viaje implements Comparable<Viaje>{
     }
 
 
-
-
     public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
         this.fechaHoraInicio = fechaHoraInicio;
     }
@@ -123,8 +119,6 @@ public class Viaje implements Comparable<Viaje>{
                 " | Inicio: " + fechaHoraInicio +
                 " | Fin: " + fin;
     }
-
-
 }
 
 

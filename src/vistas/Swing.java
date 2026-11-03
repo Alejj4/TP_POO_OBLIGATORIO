@@ -27,6 +27,9 @@ public class Swing {
     private JButton botonBuscarUsuario;
     private JButton botonAgregarEstacion;
     private JButton botonVolverAdmin;
+    private JButton reporteEstacionesButton;
+    private JButton reporteViajesButton;
+    private JButton reporteUsuariosButton;
     private JButton botonReporteViajes;
     private JButton botonReporteEstacion;
 
@@ -109,25 +112,24 @@ public class Swing {
             }
         });
 
-        botonReporteViajes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menuAdmin.verReporteViajesPorUsuario();
-            }
-        });
-
-        botonReporteEstacion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menuAdmin.verReporteUsoPorEstacion();
-            }
-        });
-
         botonSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"Hasta luego");
                 System.exit(0);
+            }
+        });
+
+        reporteEstacionesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuAdmin.verReporteUsoPorEstacion();
+            }
+        });
+        reporteViajesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuAdmin.verReporteViajesPorUsuario();
             }
         });
     }
