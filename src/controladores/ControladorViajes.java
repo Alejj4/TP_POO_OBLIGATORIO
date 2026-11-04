@@ -76,16 +76,17 @@ public class ControladorViajes {
                     usuario.registrarViajeConPlan();
                 }
 
-                if (totalViaje > 0) {
-                    Cuenta cuentaUsuario = usuario.getCuenta();
-                    try {
+                try {
+                    if (totalViaje > 0) {
+                        Cuenta cuentaUsuario = usuario.getCuenta();
                         cuentaUsuario.debitar(totalViaje, "se ha debitado el viaje en la cuenta del usuario");
-                    } catch (ImporteInvalidoException e) {
-                        System.out.println(e.getMessage());
                     }
+                } catch (ImporteInvalidoException e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    repositorio.guardarTodos();
                 }
 
-                repositorio.guardarTodos();
                 return totalViaje;
             }
         }
