@@ -2,6 +2,7 @@
 
     import usuarios.Usuario;
     import vehiculos.*;
+    import viajes.Viaje;
 
     import java.time.LocalDate;
     import java.util.ArrayList;
@@ -151,6 +152,18 @@
             } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error al cargar vehículos: " + e.getMessage());
             }
+        }
+
+        public List<Viaje> viajesDeEstacion(Estacion estacion) {
+            List<Viaje> resultado = new ArrayList<>();
+            for (Usuario usuario : usuarios) {
+                for (Viaje viaje : usuario.getViajes()) {
+                    if (viaje.getEstacionOrigen() == estacion || viaje.getEstacionDestino() == estacion) {
+                        resultado.add(viaje);
+                    }
+                }
+            }
+            return resultado;
         }
 
         public List<Usuario> getUsuarios() {

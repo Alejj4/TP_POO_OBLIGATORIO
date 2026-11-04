@@ -2,7 +2,6 @@ package controladores;
 
 import excepciones.*;
 import repositorio.Repositorio;
-import usuarios.Cuenta;
 import usuarios.Usuario;
 import vehiculos.Estacion;
 import vehiculos.Vehiculo;
@@ -59,36 +58,36 @@ public class ControladorViajes {
             throw new EstacionNoEncontradaException("No existe la estación " + codigoEstacion);
         }
 
-        for (Viaje viaje : usuario.getViajes()) {
-            if (viaje.getFechaHoraFin() == null) {
-                viaje.finalizar(estacion);
-                estacion.agregarVehiculo(viaje.getVehiculo());
-
-                Promocion promo = null;
-                if (usuario.getTienePlanMensual()) {
-                    promo = new PlanMensual();
-                } else if (usuario.cantidadViajesPrevios(viaje) == 0.) {
-                    promo = new PrimerViaje();
-                }
-                double totalViaje = viaje.calcularCosto(promo);
-
-                if (usuario.getTienePlanMensual() && !viaje.fueCancelado()) {
-                    usuario.registrarViajeConPlan();
-                }
-
-                try {
-                    if (totalViaje > 0) {
-                        Cuenta cuentaUsuario = usuario.getCuenta();
-                        cuentaUsuario.debitar(totalViaje, "se ha debitado el viaje en la cuenta del usuario");
-                    }
-                } catch (ImporteInvalidoException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    repositorio.guardarTodos();
-                }
-
-                return totalViaje;
-            }
+        Viaje viaje = usuario.getViajeAbierto();
+        if (viaje == null) {
+            throw new NoTieneViajeAbiertoException("No tenés ningún viaje en curso.");
         }
-        throw new NoTieneViajeAbiertoException("No tenés ningún viaje en curso.");    }
+
+        viaje.finalizar(estacion);
+        estacion.agregarVehiculo(viaje.getVehiculo());
+
+        Promocion promo = null;
+        if (usuario.getTienePlanMensual()) {
+            promo = new PlanMensual();
+        } else if (usuario.cantidadViajesPrevios(viaje) == 0) {
+            promo = new PrimerViaje();
+        }
+        double totalViaje = viaje.calcularCosto(promo);
+
+        if (usuario.getTienePlanMensual() && !viaje.fueCancelado()) {
+            usuario.registrarViajeConPlan();
+        }
+
+        try {
+            if (totalViaje > 0) {
+                usuario.getCuenta().debitar(totalViaje, "Se ha debitado el viaje en la cuenta del usuario.");
+            }
+        } catch (ImporteInvalidoException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            repositorio.guardarTodos();
+        }
+
+        return totalViaje;
+    }
 }
