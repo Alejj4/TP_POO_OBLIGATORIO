@@ -76,7 +76,13 @@ public class MenuAdmin extends Menu{
     }
 
     public void verReporteUsoPorEstacion() {
-        String codigo = JOptionPane.showInputDialog("Código de la estación:");
+        List<Estacion> estacionesOrdenadas = controladorEstacion.obtenerEstacionesOrdenadasPorCapacidad();
+        String listadoEstaciones = "Estaciones disponibles (ordenadas por capacidad):\n";
+        for (Estacion estacion : estacionesOrdenadas) {
+            listadoEstaciones += estacion.toString() + "\n";
+        }
+
+        String codigo = JOptionPane.showInputDialog(listadoEstaciones + "\nCódigo de la estación:");
         if (codigo == null) return;
 
         try {
