@@ -65,13 +65,12 @@ Los diagramas actualizados están en `docs/uml` (`diagrama_clases_final.jpg`).
 - **Polimorfismo en `Viaje.finalizar`:** el comportamiento por tipo de vehículo se resolvía con condicionales; se pasó a `registrarUso` en cada subclase.
 - **Persistencia:** hubo una ruta mal escrita y conflictos entre ramas por `usuarios.txt`; lo resolvimos con rutas relativas a la raíz del proyecto y agregando `datos/usuarios.txt` al `.gitignore`.
 - **Trabajo en paralelo con Git:** conflictos de merge en `Usuario` y en archivos de IntelliJ (`.idea`); los resolvimos con ramas por integrante, pull requests revisados entre nosotros y dejando de versionar archivos de configuración del IDE.
-- **Interfaz Swing:** el formulario de IntelliJ (UI Designer) necesita el plugin instalado; sin él los botones quedan nulos. Lo dejamos indicado como requisito en el README.
 
 ## 6. Limitaciones conocidas
 
 - Una estación puede quedar por encima de su capacidad máxima si se devuelven más vehículos que lugares (se eliminó el control a propósito; ver plan de pruebas, caso L1).
 - Los viajes, la posición de los vehículos y la batería no se guardan entre ejecuciones (caso L2). Sí se guardan usuarios, saldo, plan y viajes con plan usados.
-- Las pruebas unitarias son clases con `main` (no JUnit).
+- Las pruebas unitarias son clases con `main`.
 
 ## 7. Distribución de tareas
 
@@ -85,5 +84,4 @@ El reparto surge del historial de commits y pull requests del repositorio.
 
 ## 8. Reflexión
 
-*(Borrador para que el grupo lo edite con sus propias palabras.)*
-Gracias a este trabajo, pudimos ver la utilidad que tienen los distintos diagramas (secuencia y de clases) y como estos nos facilitaron mucho trabajo a la hora ded pasar a la codificación y pensar la lógica detras de cada método. Gracias a los diferentes problemas que tuvimos, logramos aprender a ajustar el diseño. Separar responsabilidades (controladores que sólo coordinan, objetos que conocen sus datos) hizo que las reglas fueran más fáciles de cambiar y de probar. También vimos la importancia de acordar el alcance temprano, probar con casos concretos y coordinar el trabajo en Git con ramas y revisiones cruzadas. Con más tiempo implementaríamos los técnicos y la redistribución, persistiríamos los viajes.
+Gracias a este trabajo, pudimos ver la utilidad que tienen los distintos diagramas (secuencia y de clases) y cómo estos nos facilitaron mucho trabajo a la hora de pasar a la codificación y pensar la lógica detrás de cada método. Gracias a los diferentes problemas que tuvimos, logramos aprender a ajustar el diseño. Separar responsabilidades (controladores que sólo coordinan, objetos que conocen sus datos) hizo que las reglas fueran más fáciles de cambiar y de probar. También vimos la importancia de acordar el alcance temprano, probar con casos concretos y coordinar el trabajo en Git con ramas y revisiones cruzadas. Con más tiempo implementaríamos los técnicos y la redistribución, persistiríamos los viajes.
