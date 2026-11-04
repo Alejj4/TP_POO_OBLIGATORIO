@@ -4,6 +4,7 @@ import excepciones.*;
 import vehiculos.Estacion;
 import vehiculos.Estado;
 import vehiculos.Vehiculo;
+import viajes.PlanMensual;
 import viajes.Viaje;
 
 import java.util.ArrayList;
@@ -120,6 +121,9 @@ public class Usuario {
 
     public void registrarViajeConPlan() {
         viajesConPlanUsados++;
+        if(viajesConPlanUsados >= PlanMensual.TOPE_VIAJES){
+            tienePlanMensual = false;
+        }
     }
 
     public int getViajesConPlanUsados() {

@@ -135,10 +135,21 @@ public class Swing {
     }
 
     public void iniciar() {
+        Font fuente = new Font("Segoe UI", Font.PLAIN, 14);
+        UIManager.put("OptionPane.messageFont", fuente);
+        UIManager.put("OptionPane.buttonFont", new Font("Segoe UI", Font.BOLD, 13));
+        UIManager.put("TextField.font", fuente);
+        UIManager.put("Label.font", fuente);
+
         JFrame frame = new JFrame("Schipani Express");
+        java.net.URL urlLogo = getClass().getResource("/vistas/logo.png");
+        if (urlLogo != null) {
+            frame.setIconImage(new ImageIcon(urlLogo).getImage());
+        }
         frame.setContentPane(Main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(540, 500);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

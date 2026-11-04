@@ -4,12 +4,12 @@ import java.time.Duration;
 
 public class PlanMensual implements Promocion{
     private String nombre = "Plan mensual";
-    private int topeViajes = 20;
+    public static final int TOPE_VIAJES = 20;
     private int minutosMaximos = 30;
 
     @Override
     public double calcularDescuento(Viaje viaje, double costo) {
-        if (!viaje.getUsuario().getTienePlanMensual() || viaje.getUsuario().getViajesConPlanUsados() >= topeViajes) {
+        if (!viaje.getUsuario().getTienePlanMensual() || viaje.getUsuario().getViajesConPlanUsados() >= TOPE_VIAJES) {
             return 0.0;
         } else {
             long duracion = Duration.between(viaje.getFechaHoraInicio(), viaje.getFechaHoraFin()).toMinutes();
