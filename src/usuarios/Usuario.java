@@ -131,6 +131,15 @@ public class Usuario {
         return cuenta;
     }
 
+    public Viaje getViajeAbierto() {
+        for (Viaje viaje : viajes) {
+            if (!viaje.estaFinalizado()) {
+                return viaje;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return nombre + " (DNI " + documento + ") - Email: " + email

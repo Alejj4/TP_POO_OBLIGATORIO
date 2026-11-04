@@ -28,15 +28,10 @@ public class ControladorReporte {
 
     public List<Viaje> reporteUsoPorEstacion(String codigo) throws EstacionNoEncontradaException {
         Estacion estacion = repositorio.buscarEstacion(codigo);
-        if (estacion == null){
+        if (estacion == null) {
             throw new EstacionNoEncontradaException("No existe la estación " + codigo);
         }
-        List<Viaje> resultado = new ArrayList<>();
-        for (Usuario usuario : repositorio.getUsuarios())
-            for (Viaje viaje : usuario.getViajes())
-                if (viaje.getEstacionOrigen() == estacion || viaje.getEstacionDestino() == estacion){
-                    resultado.add(viaje);
-                }
+        List<Viaje> resultado = repositorio.viajesDeEstacion(estacion);
         Collections.sort(resultado);
         return resultado;
     }
