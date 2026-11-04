@@ -13,14 +13,14 @@ El sistema permite:
 - Registrar usuarios y cargar saldo en su cuenta (el medio de pago se asocia en la primera recarga).
 - Retirar un vehículo de una estación, controlando que el usuario tenga saldo suficiente y no tenga otro viaje abierto.
 - Devolver el vehículo en cualquier estación, calcular la tarifa según el tiempo de uso y el tipo de vehículo, aplicar promociones y debitar el monto de la cuenta.
-- Suscribirse al plan mensual ($15.000). El plan no vence: queda activo hasta que se cancele.
-- Como administrador, buscar usuarios y registrar nuevas estaciones.
+- Suscribirse al plan mensual ($15.000). El plan se desactiva solo al usar los 20 viajes y se puede volver a suscribir.
+- Como administrador, buscar usuarios, registrar nuevas estaciones y ver dos reportes: viajes de un usuario (más recientes primero) y uso de una estación.
 
 Promociones:
 - **Primer viaje:** los primeros 15 minutos del primer viaje de cada usuario son gratis.
 - **Plan mensual:** los viajes de hasta 30 minutos son gratis, con un tope de 20 viajes. Si se pasa de los 30 minutos, se cobran solo los minutos excedentes.
 
-**Alcance recortado respecto de la Etapa 1:** no se implementaron los técnicos, empleados/operadores, órdenes de mantenimiento, reporte de fallas, redistribución de vehículos ni reportes del administrador. El detalle está en el informe final.
+**Alcance recortado respecto de la Etapa 1:** no se implementaron los técnicos, empleados/operadores, órdenes de mantenimiento, reporte de fallas, redistribución de vehículos. El detalle está en el informe final.
 
 ### Instalación y ejecución:
 1. Ejecutar la clase `Main` (`src/Main.java`). El directorio de trabajo tiene que ser la raíz del proyecto, para que el programa encuentre la carpeta `datos/`.
@@ -62,11 +62,12 @@ Los datos se guardan en archivos de texto dentro de `datos/`:
 
 **Recorrido sugerido para probar el sistema:**
 1. Usuario → Registrar usuario (por ejemplo: Juan, 12345678, juan@mail.com).
-2. Usuario → Agregar saldo: documento 12345678, importe 5000, medio de pago "Débito".
+2. Usuario → Agregar saldo: documento 12345678, importe 20000, medio de pago "Débito".
 3. Usuario → Retirar vehículo: documento 12345678, estación E01, vehículo BC01.
 4. Usuario → Devolver vehículo: documento 12345678, estación E02. Como es su primer viaje y dura menos de 15 minutos, el costo es $0.
 5. Usuario → Plan mensual: documento 12345678 (necesita al menos $15.000 de saldo).
 6. Administrador → Buscar usuario: documento 12345678, muestra sus datos y su saldo.
+7. Administrador → Reportes: viajes del usuario 12345678 y uso de la estación E02.
 
 ### Pruebas unitarias:
 Están en `/test`. Cada clase tiene un `main` que ejecuta los casos e imprime el resultado por consola:
@@ -74,13 +75,15 @@ Están en `/test`. Cada clase tiene un `main` que ejecuta los casos e imprime el
 - `usuarios/UsuarioTest`: condiciones de retiro y acreditación de saldo.
 - `viajes/ViajeTest`: cambio de estado de los vehículos al finalizar un viaje, cálculo del costo y promoción de primer viaje.
 
+Las pruebas funcionales (casos con entrada, resultado esperado y obtenido) están en `docs/plan_de_pruebas.md`.
+
 ### Estructura del proyecto:
-- `/docs`: documentación general (enunciado elegido, requisitos y supuestos, informe y plan de pruebas).
+- `/docs`: documentación general (`informe_final.md` y `plan_de_pruebas.md`, además del documento de la Etapa 1 en PDF).
   - `/docs/uml`: diagramas UML (archivos fuente y exportaciones de imágenes).
 - `/datos`: archivos de persistencia.
 - `/src`: código fuente en Java, organizado en paquetes:
-  - `controladores`: orquestan los casos de uso usando el repositorio (`ControladorCuenta`, `ControladorViajes`, `ControladorEstacion`).
-  - `excepciones`: excepciones propias para las reglas de negocio (`SaldoInsuficienteException`, `ImporteInvalidoException`, `VehiculoNoDisponibleException`, `PlanMensualActivoException`, `UsuarioNoEncontradoException`, `EstacionNoEncontradaException`, `RetiroNoPermitidoException`).
+  - `controladores`: orquestan los casos de uso usando el repositorio (`ControladorCuenta`, `ControladorViajes`, `ControladorEstacion`, `ControladorReporte`).
+  - `excepciones`: excepciones propias para las reglas de negocio (`SaldoInsuficienteException`, `ImporteInvalidoException`, `VehiculoNoDisponibleException`, `PlanMensualActivoException`, `UsuarioNoEncontradoException`, `EstacionNoEncontradaException`, `RetiroNoPermitidoException`, `NoTieneViajeAbiertoException`).
   - `menu`: lógica de cada pantalla (`Menu` abstracta, `MenuUsuario`, `MenuAdmin`).
   - `repositorio`: guarda en memoria usuarios y estaciones, y los lee y escribe en archivos (`Repositorio`).
   - `usuarios`: usuarios, cuentas y movimientos de saldo (`Usuario`, `Cuenta`, `Movimiento`).
