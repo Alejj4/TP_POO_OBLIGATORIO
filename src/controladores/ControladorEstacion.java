@@ -16,6 +16,14 @@ public class ControladorEstacion {
         this.repositorio = repositorio;
     }
 
+    public Repositorio getRepositorio() {
+        return repositorio;
+    }
+
+    public Estacion buscarEstacion(String codigo) {
+        return repositorio.buscarEstacion(codigo);
+    }
+
 
 
     public Estacion registrarEstacion(String codigo, String direccion,

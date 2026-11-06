@@ -17,6 +17,14 @@ public class MenuUsuario extends Menu{
 
     }
 
+    public ControladorCuenta getControladorCuenta() {
+        return controladorCuenta;
+    }
+
+    public ControladorViajes getControladorViajes() {
+        return controladorViajes;
+    }
+
     public void registrarUsuario() {
         String nombre = JOptionPane.showInputDialog("Nombre:");
         if(nombre == null) return;

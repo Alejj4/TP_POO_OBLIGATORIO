@@ -25,4 +25,8 @@ public class BicicletaComun extends Vehiculo {
         int minutosExcedentes = minutos - 120;
         return 200 + (20 * 120) + (20 * 1.5 * minutosExcedentes);
     }
+
+    public int getTamanioRodado() {
+        return tamanioRodado;
+    }
 }

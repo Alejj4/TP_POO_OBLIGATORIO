@@ -24,6 +24,10 @@ public class Cuenta {
         return saldo;
     }
 
+    public String getMedioPagoAsociado() {
+        return medioPagoAsociado;
+    }
+
     public List<Movimiento> getMovimientos() { return movimientos; }
 
 

@@ -28,6 +28,14 @@ public class Usuario {
         return documento;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public Usuario(String nombre, String documento, String email){
         this.nombre = nombre;
         this.documento = documento;

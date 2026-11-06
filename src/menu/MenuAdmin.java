@@ -23,6 +23,18 @@ public class MenuAdmin extends Menu{
         this.controladorEstacion = controladorEstacion;
         this.controladorReporte = controladorReporte;
     }
+
+    public ControladorCuenta getControladorCuenta() {
+        return controladorCuenta;
+    }
+
+    public ControladorEstacion getControladorEstacion() {
+        return controladorEstacion;
+    }
+
+    public ControladorReporte getControladorReporte() {
+        return controladorReporte;
+    }
     // hay que hacer la logica para que aparezca en pantalla el tema de los reportes
 
     public void buscarUsuario() {

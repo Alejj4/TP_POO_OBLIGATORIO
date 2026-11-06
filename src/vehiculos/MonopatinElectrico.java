@@ -55,5 +55,7 @@ public class MonopatinElectrico extends Vehiculo {
          this.nivelBateria=bateria;
     }
 
-
+    public double getVelocidadMaxima() {
+        return velocidadMaxima;
+    }
 }
