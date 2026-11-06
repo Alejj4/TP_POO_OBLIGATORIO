@@ -145,6 +145,13 @@ public class Swing {
         System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
 
+        if (repositorio.buscarUsuario("12345678") == null && repositorio.getUsuarios().isEmpty()) {
+            try {
+                ctrlCuenta.registrarUsuario("Juan Pérez", "12345678", "juan@mail.com");
+                ctrlCuenta.agregarSaldo("12345678", 20000.0, "Tarjeta de Débito");
+            } catch (Exception ignored) {}
+        }
+
         frame = new JFrame("Schipani Express — Sistema de Movilidad Compartida CABA");
         java.net.URL urlLogo = getClass().getResource("/vistas/logo.png");
         if (urlLogo != null) {
